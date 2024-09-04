@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gke-cluster-config
+data:
+  cluster-config: |
+    {
+      "name": "my-gke-cluster",
+      "location": "us-central1-a",
+      "initialNodeCount": 5,
+      "nodeConfig": {
+        "machineType": "n1-standard-2",  # Adjust machine type if needed
+        "minCpuPlatform": "n2-standard-2",  # Ensure at least 2 CPU cores
+        "memoryGiB": 2048,  # Set minimum RAM to 2GB
+        "bootDisk": {
+          "initializeParams": {
+            "diskType": "pd-standard",
+            "sizeGb": 40
+          }
+        },
+        "networkInterfaces": [
+          {
+            "accessConfigs": [
+              {
+                "name": "default",
+                "type": "ONE_TO_ONE_NAT"
+              }
+            ]
+          }
+        ]
+      },
+      "resourceLabels": {
+        "twistlock": "true"
+      }
+    }
