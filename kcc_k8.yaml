@@ -8,6 +8,13 @@ data:
       "name": "my-gke-cluster",
       "location": "us-central1-a",
       "initialNodeCount": 5,
+      "autoscaling": {
+        "enabled": true,
+        "minNodeCount": 5,
+        "maxNodeCount": 10,
+        "metricSettings": {
+          "utilizationTarget": 0.8
+        },
       "nodeConfig": {
         "machineType": "n1-standard-2",  # Adjust machine type if needed
         "minCpuPlatform": "n2-standard-2",  # Ensure at least 2 CPU cores
